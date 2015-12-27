@@ -11,7 +11,7 @@ dnses=(
 )
 
 function dnsToIPs() {
-    ips=`dig $1| awk '/ANSWER SECTION:/ {flag=1;next} /AUTHORITY SECTION:/ {flag=0} flag && $4=="A" {print $5}'`
+    ips=`dig +noall +answer $1 | awk '$4=="A" {print $5}'`
     echo $ips
 }
 
